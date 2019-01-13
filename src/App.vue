@@ -1,28 +1,57 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
-  </div>
+	<div>
+		<header>
+			<div class="hearder">请发表对Vue的评论</div>
+		</header>
+		<Add :addComment="addComment"/>
+		<List :comments="comments" :deleteComment="deleteComment"/>
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+	import Add from './components/Add.vue'
+	import List from './components/List.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	export default {
+		data() {
+			return {
+				comments:[
+					{
+						name:'AAA',
+						comment: 'Vue真好用!'
+					},
+					{
+						name:'BBB',
+						comment: 'Vue有点难!'
+					},
+					{
+						name:'CCC',
+						comment: 'Vue还好吧!'
+					}
+				]
+			}
+		},
+		components: {
+			Add,
+			List
+		},
+		methods:{
+			addComment(comment) {
+				this.comments.unshift(comment)
+			},
+			deleteComment(index) {
+				this.comments.splice(index,1)
+			}
+		}
+	}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	.hearder {
+		height: 200px;
+		background-color: #eee;
+		font-size: 50px;
+		text-align: center;
+		line-height: 200px;
+	}
 </style>
